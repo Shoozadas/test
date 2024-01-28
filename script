@@ -1,0 +1,41 @@
+--abaixo estara lib de nossa UI
+
+local lib = local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/7yhx/kwargs_Ui_Library/main/source.lua"))()
+
+local UI = Lib:Create{
+    Theme = "Dark", -- or any other theme
+    Size = UDim2.new(0, 555, 0, 400) -- default
+ }
+ 
+ local Main = UI:Tab{
+    Name = "shoozadas"
+ }
+ 
+ local Divider = Main:Divider{
+    Name = "shoozadas shit"
+ }
+ 
+ local QuitDivider = Main:Divider{
+    Name = "sair"
+ }
+
+ local sword = script.Parent
+
+local debounce = false
+
+local function attack()
+    if debounce == true then return end
+    debounce = true
+    sword.Handle.Attack:Play()
+    wait(0.1)
+    sword.Handle.Attack:Stop()
+    debounce = false
+end
+
+sword.Handle.Touched:Connect(function(hit)
+    local humanoid = hit.Parent:FindFirstChild("Humanoid")
+    if humanoid and debounce == false then
+        attack()
+        humanoid:TakeDamage(10)
+    end
+end)
